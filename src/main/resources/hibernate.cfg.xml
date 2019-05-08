@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory name="">
+  <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+  <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/finance_dataset</property>
+  <property name="hibernate.connection.username">price</property>
+  <property name="hibernate.connection.password">lab4man1</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+  <property name="hibernate.id.new_generator_mappings">true</property>
+  <!-- Show the Log of SQL -->
+  <property name="show_sql">true</property>
+  <!-- Format the Log of SQL -->
+  <property name="format_sql">true</property>
+  <!-- Create if not exist, Update if exist -->
+  <property name="hibernate.hbm2ddl.auto">update</property>
+  <mapping class="com.price.finance_recorder_rest.persistence.UserEntity"/>
+  <mapping class="com.price.finance_recorder_rest.persistence.TaiwanWeightedIndexAndVolumeEntity"/>
+  <mapping class="com.price.finance_recorder_rest.persistence.TaiwanFutureIndexAndLotEntity"/>
+  <mapping class="com.price.finance_recorder_rest.persistence.OptionPutCallRatioEntity"/>
+  <mapping class="com.price.finance_recorder_rest.persistence.TPEOpenInterestEntity"/>
+  <mapping class="com.price.finance_recorder_rest.persistence.VIXEntity"/>
+ </session-factory>
+</hibernate-configuration>
