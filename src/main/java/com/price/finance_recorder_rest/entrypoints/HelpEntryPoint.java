@@ -59,7 +59,7 @@ public class HelpEntryPoint
 If you were to send: <b><i>test</i></b>
 Content-Type: text/html would output: test
 Content-Type: text/plain would output: <b><i>test</i></b>
- */
+*/
 	@GET
 	@Path("/method_index")
 	@Produces("text/plain")

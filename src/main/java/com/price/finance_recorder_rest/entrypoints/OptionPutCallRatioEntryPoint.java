@@ -30,7 +30,7 @@ public class OptionPutCallRatioEntryPoint
 	@Consumes(MediaType.APPLICATION_JSON) // Input format
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML}) // Output
 																								// format
-	public OptionPutCallRatioRsp create_option_put_call_ratio(OptionPutCallRatioReq req)
+	public OptionPutCallRatioRsp create(OptionPutCallRatioReq req)
 	{
 		if (req == null)
 			throw new MissingRequiredFieldException("Got null request");
@@ -50,7 +50,7 @@ public class OptionPutCallRatioEntryPoint
 
 	@GET
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public List<OptionPutCallRatioGetRsp> read_option_put_call_ratio(@DefaultValue("0") @QueryParam("start") int start, @DefaultValue("50") @QueryParam("limit") int limit)
+	public List<OptionPutCallRatioGetRsp> read(@DefaultValue("0") @QueryParam("start") int start, @DefaultValue("50") @QueryParam("limit") int limit)
 	{
 		OptionPutCallRatioDTO dto = new OptionPutCallRatioDTO();
 		dto.setStart(start);
@@ -78,7 +78,7 @@ public class OptionPutCallRatioEntryPoint
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON) // Input format
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML}) // Output format
-	public OptionPutCallRatioRsp update_option_put_call_ratio(OptionPutCallRatioReq req)
+	public OptionPutCallRatioRsp update(OptionPutCallRatioReq req)
 	{
 		if (req == null)
 			throw new MissingRequiredFieldException("Got null request");
@@ -99,7 +99,7 @@ public class OptionPutCallRatioEntryPoint
 	@Secured
 	@DELETE
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public OptionPutCallRatioRsp delete_option_put_call_ratio(/*OptionPutCallRatioReq req*/)
+	public OptionPutCallRatioRsp delete(/*OptionPutCallRatioReq req*/)
 	{
 //		if (req == null)
 //			throw new FinanceRecorderMissingRequiredFieldException("Got null request");
@@ -116,7 +116,7 @@ public class OptionPutCallRatioEntryPoint
 	@GET
     @Path("/sql/metadata")
 	@Produces({MediaType.TEXT_PLAIN})
-	public String read_stock_price_and_volume_sql_metadata()
+	public String read_sql_metadata()
 	{
 		OptionPutCallRatioService service = new OptionPutCallRatioService();
 		String metadata = service.read_sql_metadata();
@@ -126,7 +126,7 @@ public class OptionPutCallRatioEntryPoint
 	@GET
     @Path("/csv/metadata")
 	@Produces({MediaType.TEXT_PLAIN})
-	public String read_stock_price_and_volume_csv_metadata(@DefaultValue("") @QueryParam("dataset_folderpath") String dataset_folderpath)
+	public String read_csv_metadata(@DefaultValue("") @QueryParam("dataset_folderpath") String dataset_folderpath)
 	{
 		OptionPutCallRatioDTO dto = new OptionPutCallRatioDTO();
 		if (!dataset_folderpath.isEmpty())

@@ -29,7 +29,7 @@ public class TaiwanWeightedIndexAndVolumeEntryPoint
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON) // Input format
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML}) // Output format
-	public TaiwanWeightedIndexAndVolumeRsp create_taiwan_weighted_index_and_volume(TaiwanWeightedIndexAndVolumeReq req)
+	public TaiwanWeightedIndexAndVolumeRsp create(TaiwanWeightedIndexAndVolumeReq req)
 	{
 		if (req == null)
 			throw new MissingRequiredFieldException("Got null request");
@@ -49,7 +49,7 @@ public class TaiwanWeightedIndexAndVolumeEntryPoint
 
 	@GET
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public List<TaiwanWeightedIndexAndVolumeGetRsp> read_taiwan_weighted_index_and_volume(@DefaultValue("0") @QueryParam("start") int start, @DefaultValue("20") @QueryParam("limit") int limit)
+	public List<TaiwanWeightedIndexAndVolumeGetRsp> read(@DefaultValue("0") @QueryParam("start") int start, @DefaultValue("20") @QueryParam("limit") int limit)
 	{
 //		StockExchangeAndVolumeDTO dto = new StockExchangeAndVolumeDTO();
 //		dto.setStart(start);
@@ -75,7 +75,7 @@ public class TaiwanWeightedIndexAndVolumeEntryPoint
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON) // Input format
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML}) // Output format
-	public TaiwanWeightedIndexAndVolumeRsp update_taiwan_weighted_index_and_volume(TaiwanWeightedIndexAndVolumeReq req)
+	public TaiwanWeightedIndexAndVolumeRsp update(TaiwanWeightedIndexAndVolumeReq req)
 	{
 		if (req == null)
 			throw new MissingRequiredFieldException("Got null request");
@@ -96,7 +96,7 @@ public class TaiwanWeightedIndexAndVolumeEntryPoint
 	@Secured
 	@DELETE
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public TaiwanWeightedIndexAndVolumeRsp delete_taiwan_weighted_index_and_volume(/*StockExchangeAndVolumeReq req*/)
+	public TaiwanWeightedIndexAndVolumeRsp delete(/*StockExchangeAndVolumeReq req*/)
 	{
 //		if (req == null)
 //			throw new FinanceRecorderMissingRequiredFieldException("Got null request");
@@ -113,7 +113,7 @@ public class TaiwanWeightedIndexAndVolumeEntryPoint
 	@GET
     @Path("/sql/metadata")
 	@Produces({MediaType.TEXT_PLAIN})
-	public String read_taiwan_weighted_index_and_volume_sql_metadata()
+	public String read_sql_metadata()
 	{
 		TaiwanWeightedIndexAndVolumeService service = new TaiwanWeightedIndexAndVolumeService();
 		String metadata = service.read_sql_metadata();
@@ -123,7 +123,7 @@ public class TaiwanWeightedIndexAndVolumeEntryPoint
 	@GET
     @Path("/csv/metadata")
 	@Produces({MediaType.TEXT_PLAIN})
-	public String read_taiwan_weighted_index_and_volume_csv_metadata(@DefaultValue("") @QueryParam("dataset_folderpath") String dataset_folderpath)
+	public String read_csv_metadata(@DefaultValue("") @QueryParam("dataset_folderpath") String dataset_folderpath)
 	{
 		TaiwanWeightedIndexAndVolumeDTO dto = new TaiwanWeightedIndexAndVolumeDTO();
 		if (!dataset_folderpath.isEmpty())

@@ -29,7 +29,7 @@ public class TaiwanFutureIndexAndLotEntryPoint
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON) // Input format
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML}) // Output format
-	public TaiwanFutureIndexAndLotRsp create_taiwan_future_index_and_lot(TaiwanFutureIndexAndLotReq req)
+	public TaiwanFutureIndexAndLotRsp create(TaiwanFutureIndexAndLotReq req)
 	{
 		if (req == null)
 			throw new MissingRequiredFieldException("Got null request");
@@ -49,7 +49,7 @@ public class TaiwanFutureIndexAndLotEntryPoint
 
 	@GET
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public List<TaiwanFutureIndexAndLotGetRsp> read_taiwan_future_index_and_lot(@DefaultValue("0") @QueryParam("start") int start, @DefaultValue("20") @QueryParam("limit") int limit)
+	public List<TaiwanFutureIndexAndLotGetRsp> read(@DefaultValue("0") @QueryParam("start") int start, @DefaultValue("20") @QueryParam("limit") int limit)
 	{
 //		StockExchangeAndVolumeDTO dto = new StockExchangeAndVolumeDTO();
 //		dto.setStart(start);
@@ -75,7 +75,7 @@ public class TaiwanFutureIndexAndLotEntryPoint
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON) // Input format
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML}) // Output format
-	public TaiwanFutureIndexAndLotRsp update_taiwan_future_index_and_lot(TaiwanFutureIndexAndLotReq req)
+	public TaiwanFutureIndexAndLotRsp update(TaiwanFutureIndexAndLotReq req)
 	{
 		if (req == null)
 			throw new MissingRequiredFieldException("Got null request");
@@ -96,7 +96,7 @@ public class TaiwanFutureIndexAndLotEntryPoint
 	@Secured
 	@DELETE
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public TaiwanFutureIndexAndLotRsp delete_taiwan_future_index_and_lot(/*StockExchangeAndVolumeReq req*/)
+	public TaiwanFutureIndexAndLotRsp delete(/*StockExchangeAndVolumeReq req*/)
 	{
 //		if (req == null)
 //			throw new FinanceRecorderMissingRequiredFieldException("Got null request");
@@ -113,7 +113,7 @@ public class TaiwanFutureIndexAndLotEntryPoint
 	@GET
     @Path("/sql/metadata")
 	@Produces({MediaType.TEXT_PLAIN})
-	public String read_taiwan_future_index_and_lot_sql_metadata()
+	public String read_sql_metadata()
 	{
 		TaiwanFutureIndexAndLotService service = new TaiwanFutureIndexAndLotService();
 		String metadata = service.read_sql_metadata();
@@ -123,7 +123,7 @@ public class TaiwanFutureIndexAndLotEntryPoint
 	@GET
     @Path("/csv/metadata")
 	@Produces({MediaType.TEXT_PLAIN})
-	public String read_taiwan_future_index_and_lot_csv_metadata(@DefaultValue("") @QueryParam("dataset_folderpath") String dataset_folderpath)
+	public String read_csv_metadata(@DefaultValue("") @QueryParam("dataset_folderpath") String dataset_folderpath)
 	{
 		TaiwanFutureIndexAndLotDTO dto = new TaiwanFutureIndexAndLotDTO();
 		if (!dataset_folderpath.isEmpty())

@@ -17,36 +17,33 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.BeanUtils;
 
-import com.price.finance_recorder_rest.common.CmnDef.FinanceMethod;
 import com.price.finance_recorder_rest.exceptions.MissingRequiredFieldException;
 import com.price.finance_recorder_rest.namebinding.Secured;
-import com.price.finance_recorder_rest.service.FinanceServiceDelegator;
-import com.price.finance_recorder_rest.service.StockPriceAndVolumeDTO;
-import com.price.finance_recorder_rest.service.StockPriceAndVolumeService;
+import com.price.finance_recorder_rest.service.RevenueDTO;
+import com.price.finance_recorder_rest.service.RevenueService;
 
-
-@Path("/stock_exchange_and_volume")
-public class StockPriceAndVolumeEntryPoint 
+@Path("/revenue")
+public class RevenueEntryPoint 
 {
     @Secured
     @POST
     @Path("/{company_number}")
     @Consumes(MediaType.APPLICATION_JSON) // Input format
     @Produces({ MediaType.APPLICATION_JSON,  MediaType.APPLICATION_XML} ) // Output format
-    public StockPriceAndVolumeRsp create(@PathParam("company_number") String company_number, StockPriceAndVolumeReq req) 
+    public RevenueRsp create(@PathParam("company_number") String company_number, RevenueReq req) 
 	{
 		if (req == null)
 			throw new MissingRequiredFieldException("Got null request");
-		StockPriceAndVolumeDTO dto = new StockPriceAndVolumeDTO();
+		RevenueDTO dto = new RevenueDTO();
 //Bean object, copy from requestObject to userDto
 //Only firstName, lastName, email, password variables are copied;
 		BeanUtils.copyProperties(req, dto);
 		dto.validateRequiredFields();
 
-		StockPriceAndVolumeService service = new StockPriceAndVolumeService();
+		RevenueService service = new RevenueService();
 		service.create(company_number, dto);
 
-		StockPriceAndVolumeRsp rsp = new StockPriceAndVolumeRsp();
+		RevenueRsp rsp = new RevenueRsp();
 
 		return rsp;
 	}
@@ -55,22 +52,22 @@ public class StockPriceAndVolumeEntryPoint
 	@GET
     @Path("/{company_number}")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public List<StockPriceAndVolumeGetRsp> read(@PathParam("company_number") String company_number, @DefaultValue("0") @QueryParam("start") int start, @DefaultValue("20") @QueryParam("limit") int limit)
+	public List<RevenueGetRsp> read(@PathParam("company_number") String company_number, @DefaultValue("0") @QueryParam("start") int start, @DefaultValue("20") @QueryParam("limit") int limit)
 	{
-		StockPriceAndVolumeDTO dto = new StockPriceAndVolumeDTO();
+		RevenueDTO dto = new RevenueDTO();
 		dto.setStart(start);
 		dto.setLimit(limit);
 
 		dto.validateRequiredFields();
 
-		StockPriceAndVolumeService service = new StockPriceAndVolumeService();
-		List<StockPriceAndVolumeDTO> dto_get_list = service.read(company_number, start, limit);
+		RevenueService service = new RevenueService();
+		List<RevenueDTO> dto_get_list = service.read(company_number, start, limit);
 
 // Prepare return value
-		List<StockPriceAndVolumeGetRsp> rsp_list = new ArrayList<StockPriceAndVolumeGetRsp>();
-		for (StockPriceAndVolumeDTO dto_get : dto_get_list)
+		List<RevenueGetRsp> rsp_list = new ArrayList<RevenueGetRsp>();
+		for (RevenueDTO dto_get : dto_get_list)
 		{
-			StockPriceAndVolumeGetRsp rsp = new StockPriceAndVolumeGetRsp();
+			RevenueGetRsp rsp = new RevenueGetRsp();
 			BeanUtils.copyProperties(dto_get, rsp);
 //			rsp.setHref("/users/" + dto.getUserId());
 			rsp_list.add(rsp);
@@ -84,20 +81,20 @@ public class StockPriceAndVolumeEntryPoint
     @Path("/{company_number}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public StockPriceAndVolumeRsp update(@PathParam("company_number") String company_number, StockPriceAndVolumeReq req) 
+    public RevenueRsp update(@PathParam("company_number") String company_number, RevenueReq req) 
     {    
 		if (req == null)
 			throw new MissingRequiredFieldException("Got null request");
-		StockPriceAndVolumeDTO dto = new StockPriceAndVolumeDTO();
+		RevenueDTO dto = new RevenueDTO();
 //Bean object, copy from requestObject to userDto
 //Only firstName, lastName, email, password variables are copied;
 		BeanUtils.copyProperties(req, dto);
 		dto.validateRequiredFields();
 
-		StockPriceAndVolumeService service = new StockPriceAndVolumeService();
+		RevenueService service = new RevenueService();
 		service.update(company_number, dto);
 
-		StockPriceAndVolumeRsp rsp = new StockPriceAndVolumeRsp();
+		RevenueRsp rsp = new RevenueRsp();
 
 		return rsp;
     }
@@ -106,12 +103,12 @@ public class StockPriceAndVolumeEntryPoint
     @DELETE
     @Path("/{company_number}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public StockPriceAndVolumeRsp delete(@PathParam("company_number") String company_number) 
+    public RevenueRsp delete(@PathParam("company_number") String company_number) 
     {        
-		StockPriceAndVolumeService service = new StockPriceAndVolumeService();
+		RevenueService service = new RevenueService();
 		service.delete(company_number);
 
-		StockPriceAndVolumeRsp rsp = new StockPriceAndVolumeRsp();
+		RevenueRsp rsp = new RevenueRsp();
 
 		return rsp;
     }
@@ -121,7 +118,7 @@ public class StockPriceAndVolumeEntryPoint
 	@Produces({MediaType.TEXT_PLAIN})
 	public String read_sql_metadata(@PathParam("company_number") String company_number)
 	{
-		StockPriceAndVolumeService service = new StockPriceAndVolumeService();
+		RevenueService service = new RevenueService();
 		String metadata = service.read_sql_metadata(company_number);
 		return metadata;
 	}
@@ -131,14 +128,14 @@ public class StockPriceAndVolumeEntryPoint
 	@Produces({MediaType.TEXT_PLAIN})
 	public String read_csv_metadata(@PathParam("company_number") String company_number, @DefaultValue("") @QueryParam("dataset_folderpath") String dataset_folderpath)
 	{
-		StockPriceAndVolumeDTO dto = new StockPriceAndVolumeDTO();
+		RevenueDTO dto = new RevenueDTO();
 		if (!dataset_folderpath.isEmpty())
 			dto.setDatasetFolderpath(dataset_folderpath);
 //Bean object, copy from requestObject to userDto
 //Only firstName, lastName, email, password variables are copied;
 		dto.validateRequiredFields();
 
-		StockPriceAndVolumeService service = new StockPriceAndVolumeService();
+		RevenueService service = new RevenueService();
 		String metadata = service.read_csv_metadata(company_number, dto);
 		return metadata;
 	}
